@@ -1,10 +1,8 @@
 package org.devathon.contest2016;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
 
 import java.util.UUID;
 
@@ -16,14 +14,20 @@ import java.util.UUID;
  * way without written permission of the author.
  */
 public class TeleporterPad {
+	private UUID uuid = null;
 	private Location pad1 = null;
 	private Location pad2 = null;
 	private UUID owner = null;
 
-	public TeleporterPad(Location pad1, Location pad2, Player owner ) {
+	public TeleporterPad(Location pad1, Location pad2, Player owner) {
+		this.uuid = UUID.randomUUID();
 		this.pad1 = pad1;
 		this.pad2 = pad2;
 		this.owner = owner.getUniqueId();
+	}
+
+	public UUID getUuid() {
+		return uuid;
 	}
 
 	public Location getPad1() {
@@ -36,6 +40,19 @@ public class TeleporterPad {
 
 	public UUID getOwner() {
 		return owner;
+	}
+
+	public void teleport(Player player, Location location) {
+		if (getPad1().equals(location)) {
+			player.teleport(getPad2().add(0, 1, 0));
+			player.sendMessage(ChatColor.GREEN + "Whoosh");
+		} else if (getPad2().equals(location)) {
+			player.teleport(getPad1().add(0, 1, 0));
+			player.sendMessage(ChatColor.GREEN + "Whoosh");
+		} else {
+			// This shouldn't happen... if so RIP?
+			player.sendMessage("I don't even know how you got here...");
+		}
 	}
 
 }
