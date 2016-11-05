@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -17,14 +18,18 @@ import java.util.UUID;
 public class TeleporterHandler {
 	private DevathonPlugin devathonPlugin;
 	private HashMap<UUID, Location> pendingPads = new HashMap<>();
+	private ArrayList<TeleporterPad> pads = new ArrayList<>();
 
 	public TeleporterHandler(DevathonPlugin devathonPlugin) {
 		this.devathonPlugin = devathonPlugin;
 	}
 
 	public void addLocation(Player player, Location location) {
-		if( pendingPads.containsKey(player.getUniqueId())) {
+		if (pendingPads.containsKey(player.getUniqueId())) {
 			// Already has pending pad placed
+			Location pad1 = pendingPads.get(player.getUniqueId());
+			TeleporterPad teleporterPad = new TeleporterPad(pad1, location, player);
+			pendingPads.remove(player.getUniqueId());
 		} else {
 			// First pad being placed
 			pendingPads.put(player.getUniqueId(), location);
