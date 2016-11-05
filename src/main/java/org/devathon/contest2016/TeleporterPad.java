@@ -44,10 +44,10 @@ public class TeleporterPad {
 
 	public void teleport(Player player, Location location) {
 		if (getPad1().equals(location)) {
-			player.teleport(getPad2().add(0, 1, 0));
+			player.teleport(getPad2().clone().add(0.5, 1, 0.5));
 			player.sendMessage(ChatColor.GREEN + "Whoosh");
 		} else if (getPad2().equals(location)) {
-			player.teleport(getPad1().add(0, 1, 0));
+			player.teleport(getPad1().clone().add(0.5, 1, 0.5));
 			player.sendMessage(ChatColor.GREEN + "Whoosh");
 		} else {
 			// This shouldn't happen... if so RIP?

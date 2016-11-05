@@ -29,10 +29,10 @@ public class TeleporterHandler {
 			// Already has pending pad placed
 			Location pad1 = pendingPads.get(player.getUniqueId());
 			TeleporterPad teleporterPad = new TeleporterPad(pad1, location, player);
-			pendingPads.remove(player.getUniqueId());
 			pads.put(teleporterPad.getUuid(), teleporterPad);
 			padLocations.put(pad1, teleporterPad.getUuid());
 			padLocations.put(location, teleporterPad.getUuid());
+			pendingPads.remove(player.getUniqueId());
 			player.sendMessage(ChatColor.GREEN + "Pads have been linked, happy teleporting");
 		} else {
 			// First pad being placed
