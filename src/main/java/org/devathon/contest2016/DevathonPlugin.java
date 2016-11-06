@@ -10,9 +10,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class DevathonPlugin extends JavaPlugin {
 	private TeleporterHandler teleporterHandler = null;
 
-    @Override
-    public void onEnable() {
-        getLogger().info("Enabling Devathon Teleporter Plugin...");
+	@Override
+	public void onEnable() {
+		getLogger().info("Enabling Devathon Teleporter Plugin...");
 
 		teleporterHandler = new TeleporterHandler(this);
 
@@ -29,12 +29,12 @@ public class DevathonPlugin extends JavaPlugin {
 		// Register Listeners
 
 		getServer().getPluginManager().registerEvents(new BlockListener(this), this);
-    }
+	}
 
-    @Override
-    public void onDisable() {
-        getLogger().info("Disabling Devathon Teleporter Plugin...");
-    }
+	@Override
+	public void onDisable() {
+		getLogger().info("Disabling Devathon Teleporter Plugin...");
+	}
 
 	public TeleporterHandler getTeleporterHandler() {
 		return teleporterHandler;

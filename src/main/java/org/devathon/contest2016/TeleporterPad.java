@@ -44,10 +44,10 @@ public class TeleporterPad {
 
 	public void teleport(Player player, Location location) {
 		if (getPad1().equals(location)) {
-			player.teleport(getPad2().clone().add(0.5, 1, 0.5));
+			player.teleport(getPad2().clone().add(0.5, 0.1, 0.5));
 			player.sendMessage(ChatColor.GREEN + "Whoosh");
 		} else if (getPad2().equals(location)) {
-			player.teleport(getPad1().clone().add(0.5, 1, 0.5));
+			player.teleport(getPad1().clone().add(0.5, 0.1, 0.5));
 			player.sendMessage(ChatColor.GREEN + "Whoosh");
 		} else {
 			// This shouldn't happen... if so RIP?
@@ -55,4 +55,8 @@ public class TeleporterPad {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return getOwner().toString() + "|" + getPad1().getBlockX() + "_" + getPad1().getBlockY() + "_" + getPad1().getBlockZ() + "|" + getPad2().getBlockX() + "_" + getPad2().getBlockY() + "_" + getPad2().getBlockZ();
+	}
 }

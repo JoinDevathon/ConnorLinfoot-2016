@@ -56,7 +56,7 @@ public class TeleporterHandler {
 	}
 
 	public TeleporterPad getTeleporterPad(Location location) {
-		return pads.get( padLocations.get(location) );
+		return pads.get(padLocations.get(location));
 	}
 
 }
