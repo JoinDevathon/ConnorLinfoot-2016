@@ -1,5 +1,6 @@
 package org.devathon.contest2016;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -7,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -40,7 +42,19 @@ public class BlockListener implements Listener {
 
 	@EventHandler
 	public void onBucket(PlayerBucketEmptyEvent event) {
+		Block block = event.getBlockClicked().getRelative(event.getBlockFace());
+		Block blockBelow = block.getLocation().clone().add(0, -1, 0).getBlock();
+		if (blockBelow != null && blockBelow.getType().equals(Material.IRON_PLATE) && (devathonPlugin.getTeleporterHandler().isTeleporterPad(blockBelow.getLocation()) || devathonPlugin.getTeleporterHandler().isPendingLocation(blockBelow.getLocation()))) {
+			event.setCancelled(true);
+		}
+	}
 
+	@EventHandler
+	public void onBlockFromTo(BlockFromToEvent event) {
+		Block blockBelow = event.getToBlock().getLocation().clone().add(0, -1, 0).getBlock();
+		if (blockBelow != null && blockBelow.getType().equals(Material.IRON_PLATE) && (devathonPlugin.getTeleporterHandler().isTeleporterPad(blockBelow.getLocation()) || devathonPlugin.getTeleporterHandler().isPendingLocation(blockBelow.getLocation()))) {
+			event.setCancelled(true);
+		}
 	}
 
 	@EventHandler
